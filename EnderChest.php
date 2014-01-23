@@ -26,7 +26,8 @@ class EnderChest implements Plugin {
 		
 	public function touchHandler($data){
 		$username = $data["player"]->username;
-		if($data["target"] = 54){
+		ChestID = $data["target"]->getID(54);
+		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$level = $data["target"]->level;//Chest level. I have no clue if this is right.
 				$class = 54;
