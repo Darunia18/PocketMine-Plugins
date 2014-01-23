@@ -27,14 +27,14 @@ class EnderChest implements Plugin {
 	public function touchHandler($data){
 		$username = $data["player"]->username;
 		$ChestID = $data["target"]->getID(54);
+		$level = $data["target"]->level;//Chest level. I have no clue if this is right.
+		$class = 54;
+		$x = $data["target"]->x;//Chest x. I'm not sure if this is right.
+		$y = $data["target"]->y;//Chest y. I'm not sure if this is right.
+		$z = $data["target"]->z;//Chest z. I'm not sure if this is right.
+		$data = $this->api->plugin->readYAML($this->api->plugin->configPath($this) . $username . ".yml");
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
-				$level = $data["target"]->level;//Chest level. I have no clue if this is right.
-				$class = 54;
-				$x = $data["target"]->x;//Chest x. I'm not sure if this is right.
-				$y = $data["target"]->y;//Chest y. I'm not sure if this is right.
-				$z = $data["target"]->z;//Chest z. I'm not sure if this is right.
-				$data = $this->api->plugin->readYAML($this->api->plugin->configPath($this) . $username . ".yml");
 				$this->api->tile->add($level, $class, $x, $y, $z, $data);
 				//load $username.yml
 				//put items into chest
@@ -44,6 +44,7 @@ class EnderChest implements Plugin {
 				//READ THIS! USE $this->api->tile->add($level, $class, $x, $y, $z, $data(default: array());
 			}
 			else{
+				
 				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
 					"Items" => array(//I hope this array is right.
 						array(
