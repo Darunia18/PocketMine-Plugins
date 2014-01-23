@@ -182,9 +182,9 @@ class EnderChest implements Plugin {
 							"id" => 0,
 							"Damage" => 0)),
 					"id" => 'Chest',
-					"x" => $x,
-					"y" => $y,
-					"z" => $z));
+					"x" => "$x",
+					"y" => "$y",
+					"z" => "$z"));
 			}	
 			
 		}
