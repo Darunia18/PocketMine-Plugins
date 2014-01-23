@@ -34,8 +34,7 @@ class EnderChest implements Plugin {
 				$x = $data["target"]->x;//Chest x. I'm not sure if this is right.
 				$y = $data["target"]->y;//Chest y. I'm not sure if this is right.
 				$z = $data["target"]->z;//Chest z. I'm not sure if this is right.
-				$data = $this->api->plugin->readYAML($this->path . $username . ".yml");
-				$this->api->tile->add($level, $class, $x, $y, $z, $data);
+				$data = $this->api->plugin->readYAML($this->api->plugin->configPath($this) . $username . ".yml");				$this->api->tile->add($level, $class, $x, $y, $z, $data);
 				//load $username.yml
 				//put items into chest
 				//read what is left in the chest after closed
