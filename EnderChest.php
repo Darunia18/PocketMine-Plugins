@@ -36,7 +36,9 @@ class EnderChest implements Plugin {
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$this->api->tile->add($level, $class, $x, $y, $z, $data);
+				goto ECA;
 				//load $username.yml
+				//skips to lower function in code
 				//put items into chest
 				//read what is left in the chest after closed
 				//save what is in the chest
@@ -191,6 +193,7 @@ class EnderChest implements Plugin {
 		}
 	}
 	
+	ECA:
 	public function chestClose($data){//Something with closing the chest
 		$username = $data["player"]->username;
 		$level = $this->level;//Player/Chest level. I have no clue if this is right.
