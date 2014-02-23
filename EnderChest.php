@@ -23,14 +23,13 @@ class EnderChest implements Plugin {
 	}	
 		
 	public function touchHandler($data){
-		$username = $data["player"]->username;
+		$username = $packet->username;
 		$x = $data["target"]->x;
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
-				$position = new Position($x, $y, $z);
-				$chest = $this->api->tile->get($position);
+				$chest = $this->api->tile->get($x, $y, $z);
 				$this->config = $this->api->plugin->configPath($this . $username . ".yml");
 				$chest->setSlot(0,$this->config->get('Slot0'['id']));
 				$chest->setSlot(1,$this->config->get('Slot1'['id']));
@@ -59,8 +58,7 @@ class EnderChest implements Plugin {
 				$chest->setSlot(24,$this->config->get('Slot24'['id']));
 				$chest->setSlot(25,$this->config->get('Slot25'['id']));
 				$chest->setSlot(26,$this->config->get('Slot26'['id']));
-			}
-			else{
+			}else{
 				
 				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
 					"Items" => array(
@@ -227,30 +225,15 @@ class EnderChest implements Plugin {
 							"Damage" => 0
 						)
 					),
-					"id" => 'Chest',//Not sure if necessary
-					"x" => $x,//Not sure if necessary
-					"y" => $y,//Not sure if necessary
-					"z" => $z//Not sure if necessary
+					"id" => 'Chest',
+					"x" => $x,
+					"y" => $y,
+					"z" => $z
 				)
 				);
 			}	
 		}	
 	}
-	
-	/* NOTE: I HAVEN'T TOUCHED THE CODE BELOW AND HAVE NO CLUE WHEN/WHY I ADDED IT
-	public function setSlot($data, $s, Item $item, $update = true, $offset = 0){
-		$username = $data["player"]->username;
-		$level = $this->level;
-		$class = 54;
-		$i = $this->getSlotIndex($s);
-		$d = array( "Count" => $item->count, "Slot" => $s, "id" => $item->getID(), "Damage" => $item->getMetadata(), );
-		$x = $data->x;
-		$y = $data->y;
-		$z = $data->z;
-		$this->api->tile->add($level, $class, $x, $y, $z, $i, $d);
-	}*/
-	
-	public function __destruct(){
-	}
+	public function __destruct(){}
 }
 ?>
