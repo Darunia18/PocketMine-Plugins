@@ -4,7 +4,7 @@ __PocketMine Plugin__
 name=EnderChest
 description=Every player has personal, universal chest.
 version=Dev 0.1
-author=Darunia18
+author=Darunia18/I_Is_Payton
 class=EnderChest
 apiversion=10,11,12
 */
