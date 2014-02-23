@@ -18,7 +18,7 @@ class EnderChest implements Plugin {
 	}
 	
 	public function init() {
-		$this->api->addHandler("player.block.touch", array($this, "eventHandler"));
+		$this->api->addHandler("player.block.touch", array($this, "touchHandler"));
 	}	
 		
 	public function touchHandler($data, $packet){
