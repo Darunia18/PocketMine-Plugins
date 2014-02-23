@@ -10,8 +10,7 @@ apiversion=10,11,12
 */
 
 class EnderChest implements Plugin {
-	private $api;
-	private $config;
+	private $api, $config, $path;
 	public $class;
 	
 	public function __construct(ServerAPI $api, $server = false) {
