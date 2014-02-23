@@ -24,11 +24,10 @@ class EnderChest implements Plugin {
 	}	
 		
 	public function touchHandler($data){
-		$username = $packet->username;
-		$x = $player->entity->x;
-		$y = $player->entity->y;
-		$z = $player->entity->z;
-		
+		$username = $data["player"]->username;
+		$x = $data["target"]->x;
+		$y = $data["target"]->y;
+		$z = $data["target"]->z;
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$position = new Position($x, $y, $z);
@@ -61,7 +60,8 @@ class EnderChest implements Plugin {
 				$chest->setSlot(24,$this->config->get('Slot24'['id']));
 				$chest->setSlot(25,$this->config->get('Slot25'['id']));
 				$chest->setSlot(26,$this->config->get('Slot26'['id']));
-			}else{
+			}
+			else{
 				
 				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
 					"Items" => array(
@@ -232,11 +232,26 @@ class EnderChest implements Plugin {
 					"x" => $x,//Not sure if necessary
 					"y" => $y,//Not sure if necessary
 					"z" => $z//Not sure if necessary
-					)
+				)
 				);
 			}	
 		}	
 	}
-	public function __destruct(){}
+	
+	/* NOTE: I HAVEN'T TOUCHED THE CODE BELOW AND HAVE NO CLUE WHEN/WHY I ADDED IT
+	public function setSlot($data, $s, Item $item, $update = true, $offset = 0){
+		$username = $data["player"]->username;
+		$level = $this->level;
+		$class = 54;
+		$i = $this->getSlotIndex($s);
+		$d = array( "Count" => $item->count, "Slot" => $s, "id" => $item->getID(), "Damage" => $item->getMetadata(), );
+		$x = $data->x;
+		$y = $data->y;
+		$z = $data->z;
+		$this->api->tile->add($level, $class, $x, $y, $z, $i, $d);
+	}*/
+	
+	public function __destruct(){
+	}
 }
 ?>
