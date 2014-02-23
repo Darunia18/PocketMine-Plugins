@@ -21,6 +21,7 @@ class EnderChest implements Plugin {
 	public function init() {
 		$this->api->addHandler("player.block.activate", array($this, "touchHandler"));
 		$this->api->addHandler("player.block.touch", array($this, "eventHandler"));//I'm not sure which of these to use or if it really matters at all
+	}	
 		
 	public function touchHandler($data){
 		$username = $packet->username;
@@ -60,7 +61,6 @@ class EnderChest implements Plugin {
 				$chest->setSlot(25,$this->config->get('Slot25'('id')));
 				$chest->setSlot(26,$this->config->get('Slot26'('id')));
 			}
-		}
 			else{
 				
 				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
@@ -235,8 +235,7 @@ class EnderChest implements Plugin {
 				)
 				);
 			}	
-			
-		}
+		}	
 	}
 	
 	/* NOTE: I HAVEN'T TOUCHED THE CODE BELOW AND HAVE NO CLUE WHEN/WHY I ADDED IT
