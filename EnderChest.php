@@ -22,7 +22,7 @@ class EnderChest implements Plugin {
 		$this->api->addHandler("player.block.touch", array($this, "eventHandler"));
 	}	
 		
-	public function touchHandler($data){
+	public function touchHandler($data, $packet){
 		$username = $packet->username;
 		$x = $data["target"]->x;
 		$y = $data["target"]->y;
