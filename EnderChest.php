@@ -25,9 +25,10 @@ class EnderChest implements Plugin {
 		
 	public function touchHandler($data){
 		$username = $packet->username;
-		$x = $data["target"]->x;
-		$y = $data["target"]->y;
-		$z = $data["target"]->z;
+		$x = $player->entity->x;
+		$y = $player->entity->y;
+		$z = $player->entity->z;
+		
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$position = new Position($x, $y, $z);
