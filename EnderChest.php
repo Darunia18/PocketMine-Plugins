@@ -22,16 +22,15 @@ class EnderChest implements Plugin {
 	}	
 		
 	public function touchHandler($data){
-		$username = $data['username'];
+		$username = $data["player"]->username;
 		$x = $data["target"]->x;
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		$level = $data["target"]->level;
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
-				$this->api->tile->get(new Position($x, $y, $z, $level));
-				//$this->config = $this->api->plugin->configPath($this . $username . ".yml");
-				$this->api->plugin->writeYAML(array(
+				$chest = $this->api->tile->get(new Position($x, $y, $z, $level)); 
+				$this->config = $this->api->plugin->configPath($this).$username.".yml";
 				$chest->setSlot(0,$this->config->get('Slot0'['id']));
 				$chest->setSlot(1,$this->config->get('Slot1'['id']));
 				$chest->setSlot(2,$this->config->get('Slot2'['id']));
@@ -59,7 +58,6 @@ class EnderChest implements Plugin {
 				$chest->setSlot(24,$this->config->get('Slot24'['id']));
 				$chest->setSlot(25,$this->config->get('Slot25'['id']));
 				$chest->setSlot(26,$this->config->get('Slot26'['id']));
-				), "/enderchest/$username.yml");
 			}else{
 				
 				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
