@@ -4,7 +4,7 @@ __PocketMine Plugin__
 name=EnderChest
 description=Every player has personal, universal chest.
 version=Dev 0.1
-author=Darunia18/I_Is_Payton
+author=Darunia18
 class=EnderChest
 apiversion=10,11,12
 */
@@ -23,7 +23,7 @@ class EnderChest implements Plugin {
 		$this->api->addHandler("player.block.touch", array($this, "eventHandler"));//I'm not sure which of these to use or if it really matters at all
 		
 	public function touchHandler($data){
-		$username = $data["player"]->username;
+		$username = $packet->username;
 		$x = $data["target"]->x;
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
