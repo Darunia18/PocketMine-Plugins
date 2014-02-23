@@ -27,10 +27,10 @@ class EnderChest implements Plugin {
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		$level = $data["target"]->level;
+		$this->config = $this->api->plugin->readYAML($this->path.$username.".yml");
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$chest = $this->api->tile->get(new Position($x, $y, $z, $level)); 
-				$this->config = $this->api->plugin->configPath($this).$username.".yml";
 				$chest->setSlot(0,$this->config->get('Slot0'['id']));
 				$chest->setSlot(1,$this->config->get('Slot1'['id']));
 				$chest->setSlot(2,$this->config->get('Slot2'['id']));
@@ -60,7 +60,7 @@ class EnderChest implements Plugin {
 				$chest->setSlot(26,$this->config->get('Slot26'['id']));
 			}else{
 				
-				$this->config = new Config($this->api->plugin->configPath($this).$username.".yml", CONFIG_YAML, array(
+				$this->path = $this->api->plugin->createConfig($this.$username.".yml", array(
 					"Items" => array(
 						"Slot0" => array(
 							"Count" => 0,
