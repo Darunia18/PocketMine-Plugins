@@ -29,14 +29,14 @@ class EnderChest {
 	static $path;
 	private $config;
 	
-	function __construct(ServerAPI $api, $server = false) {
-		
+	function __construct() {
+		$this->server = ServerAPI::request();
 	}
 	
 	public function init() {
-		$this->api->addHandler("player.block.touch", array($this, "touchHandler"));
+		$this->server->api->addHandler("player.block.touch", array($this, "touchHandler"));
 		self::$path =  DATA_PATH."plugins/EnderChest/";
-		@mkdir(DATA_PATH."plugins/EnderChest/";
+		@mkdir(DATA_PATH."plugins/EnderChest/");
 	}	
 		
 	public function touchHandler($data){
@@ -45,7 +45,7 @@ class EnderChest {
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		$level = $data["target"]->level;
-		$this->config = $this->api->plugin->readYAML(self::$path).$username.".yml";
+		$this->config = $this->server->api->plugin->readYAML(self::$path).$username.".yml";
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$chest = $this->api->tile->get(new Position($x, $y, $z, $level)); 
