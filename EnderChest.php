@@ -45,10 +45,10 @@ class EnderChest {
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		$level = $data["target"]->level;
-		$this->config = $this->server->api->plugin->readYAML(self::$path).$username.".yml";
+		$this->config = $this->server->api->plugin->readYAML((self::$path).$username.".yml");
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
-				$chest = $this->api->tile->get(new Position($x, $y, $z, $level)); 
+				$chest = $this->server->api->tile->get(new Position($x, $y, $z, $level)); 
 				$chest->setSlot(0,$this->config->get('Slot0'['id']));
 				$chest->setSlot(1,$this->config->get('Slot1'['id']));
 				$chest->setSlot(2,$this->config->get('Slot2'['id']));
