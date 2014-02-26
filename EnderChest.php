@@ -5,20 +5,38 @@ name=EnderChest
 description=Every player has personal, universal chest.
 version=Dev 0.1
 author=Darunia18 & I_Is_Payton_
-class=EnderChest
+class=EnderChestAPI
 apiversion=10,11,12
 */
 
-class EnderChest implements Plugin {
-	private $api, $config, $path;
-	public $class;
+class EnderChestAPI implements Plugin {
+	private $api;
 	
-	public function __construct(ServerAPI $api, $server = false) {
+	public function __construct(ServerAPI $api, $server = false){
 		$this->api = $api;
+		$this->api->LoadAPI("enderchest", "EnderChest");
+	}
+	
+	public function init(){
+		$this->api->enderchest->init();
+	}
+	
+	public function __destruct(){
+	}
+}
+
+class EnderChest {
+	static $path;
+	private $config;
+	
+	function __construct() {
+		$this->server = ServerAPI::request();
 	}
 	
 	public function init() {
-		$this->api->addHandler("player.block.touch", array($this, "touchHandler"));
+		$this->server->api->addHandler("player.block.touch", array($this, "touchHandler"));
+		self::$path =  DATA_PATH."plugins/EnderChest/";
+		@mkdir(DATA_PATH."plugins/EnderChest/");
 	}	
 		
 	public function touchHandler($data){
@@ -27,7 +45,7 @@ class EnderChest implements Plugin {
 		$y = $data["target"]->y;
 		$z = $data["target"]->z;
 		$level = $data["target"]->level;
-		$this->config = $this->api->plugin->readYAML($this->path).$username.".yml");
+		$this->config = $this->server->api->plugin->readYAML(self::$path).$username.".yml";
 		if($ChestID = 54){
 			if(file_exists('./plugins/EnderChest/'.$username.'.yml')){
 				$chest = $this->api->tile->get(new Position($x, $y, $z, $level)); 
@@ -58,9 +76,9 @@ class EnderChest implements Plugin {
 				$chest->setSlot(24,$this->config->get('Slot24'['id']));
 				$chest->setSlot(25,$this->config->get('Slot25'['id']));
 				$chest->setSlot(26,$this->config->get('Slot26'['id']));
-			}else{
-				
-				$this->path = $this->api->plugin->createConfig($this).$username.".yml", array(
+			}
+			else{
+				$this->path = new Config(self::$path.$username.".yml", CONFIG_YAML, array(
 					"Items" => array(
 						"Slot0" => array(
 							"Count" => 0,
@@ -234,6 +252,8 @@ class EnderChest implements Plugin {
 			}	
 		}	
 	}
-	public function __destruct(){}
+		
+	public function __destruct(){
+	}
 }
 ?>
