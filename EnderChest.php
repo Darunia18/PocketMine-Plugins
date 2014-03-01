@@ -54,8 +54,7 @@ class EnderChest {
 					$item = BlockAPI::getItem($iteminfo['id'], $iteminfo['meta'], $iteminfo['count']);
 					$chest->setSlot($slot, $item);
 				}
-			}
-			else{
+			}else{
 				$this->path = new Config(self::$path.$username.".yml", CONFIG_YAML, array(
 					'items' => array(
 						0 => array(
@@ -195,12 +194,11 @@ class EnderChest {
 						)
 					),
 				)
-				);
-			}	
+			);
 		}	
-	}
+	}	
+}
 	
-	public function __destruct(){
-	}
+	public function __destruct(){}
 }
 ?>
